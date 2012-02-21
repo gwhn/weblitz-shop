@@ -1,9 +1,19 @@
-define(['underscore', 'backbone'], function(_, bb) {
-	var Router = bb.Router.extend({
-		initialize: function() {
-			bb.history.start();
+define(['underscore', 'backbone'], function(_, Backbone) {
+	var Router = Backbone.Router.extend({
+		routes: {
+			'*actions': 'do'
 		},
-		routes: {}
+		do: function(actions) {
+			console.log('default action');
+		}
 	});
-	return Router;
+
+	var initialize = function() {
+			var router = new Router();
+			Backbone.history.start();
+		};
+
+	return {
+		initialize: initialize
+	};
 });

@@ -1,8 +1,9 @@
 define(['routers/products'], function(router) {
-	var init = function() {
-			this.router = new router();
+	var initialize = function() {
+			router.initialize();
 		};
+
 	return {
-		init: init
+		initialize: initialize
 	};
 });
