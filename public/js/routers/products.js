@@ -1,7 +1,7 @@
-define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
-	var Router = Backbone.Router.extend({
+define(['underscore', 'backbone'], function(_, bb) {
+	var Router = bb.Router.extend({
 		initialize: function() {
-			Backbone.history.start();
+			bb.history.start();
 		},
 		routes: {}
 	});
