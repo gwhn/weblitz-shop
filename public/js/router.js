@@ -1,19 +1,27 @@
-define(['backbone'], function(bb) {
-	var Router = bb.Router.extend({
+define(['jquery', 'underscore', 'backbone', 'views/mediator'], function($, _, Backbone, MediatorView) {
+	var Router = Backbone.Router.extend({
 		routes: {
 			'*actions': 'do'
 		},
+
+		initialize: function() {
+			this.mediator = new MediatorView({
+				el: '#app'
+			});
+		},
+
 		do: function(actions) {
+			this.mediator.render();
 			console.log('default action');
 		}
 	});
 
-	var init = function() {
+	var initialize = function() {
 			var router = new Router();
-			bb.history.start();
+			Backbone.history.start();
 		};
 
 	return {
-		init: init
+		initialize: initialize
 	};
 });
