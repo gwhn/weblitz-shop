@@ -36,7 +36,7 @@ app.get('/products', function(req, res) {
                         if (err) throw err;
                         cursor.toArray(function(err, items) {
                             if (err) throw err;
-                            res.json(JSON.stringify(items));
+                            res.json(items);
                         });
                     });
                 });
@@ -57,7 +57,7 @@ app.get('/categories', function(req, res) {
                         if (err) throw err;
                         cursor.toArray(function(err, items) {
                             if (err) throw err;
-                            res.json(JSON.stringify(items));
+                            res.json(items);
                         });
                     });
                 });

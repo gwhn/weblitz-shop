@@ -4,17 +4,19 @@ define(['jquery', 'underscore', 'backbone', 'collections/categories', 'views/cat
 
 		initialize: function() {
 			_.bindAll(this, 'render');
-			this.categories = new CategoriesCollection({
-				url: '/categories'
-			});
+			this.categories = new CategoriesCollection();
 			this.categoryList = new CategoryListView({
-				el: '#categories',
 				collection: this.categories
 			});
 		},
 
 		render: function() {
-			$(this.el).html(this.categoryList.render().el);
+			var self = this;
+			this.categories.fetch({
+				success: function(collection, response) {
+					$(self.el).html(self.categoryList.render().el);
+				}
+			});
 			return this;
 		}
 	});

@@ -1,16 +1,27 @@
-define(['jquery', 'underscore', 'backbone', 'text!templates/categories/list.html'], function($, _, Backbone, CategoriesListTemplate) {
+define(['jquery', 'underscore', 'backbone', 'views/categories/item'], function($, _, Backbone, CategoryItemView) {
 	var CategoriesListView = Backbone.View.extend({
 		events: {},
 
-		template: _.template(CategoriesListTemplate),
+		tagName: 'ul',
 
 		initialize: function() {
-			_.bindAll(this, 'render');
+			_.bindAll(this, 'render', 'all', 'add');
 		},
 
 		render: function() {
-			$(this.el).html(this.template());
+			this.all();
 			return this;
+		},
+
+		all: function() {
+			this.collection.each(this.add);
+		},
+
+		add: function(model) {
+			var view = new CategoryItemView({
+				model: model
+			});
+			$(this.el).append(view.render().el);
 		}
 	});
 
