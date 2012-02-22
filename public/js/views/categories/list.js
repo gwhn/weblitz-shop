@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone', 'views/categories/item'], function($, _, Backbone, CategoryItemView) {
-	var CategoriesListView = Backbone.View.extend({
+	var CategoryListView = Backbone.View.extend({
 		events: {},
 
 		tagName: 'ul',
@@ -25,5 +25,5 @@ define(['jquery', 'underscore', 'backbone', 'views/categories/item'], function($
 		}
 	});
 
-	return CategoriesListView;
+	return CategoryListView;
 });

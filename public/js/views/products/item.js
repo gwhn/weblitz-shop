@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
-	var CategoryItemView = Backbone.View.extend({
+	var ProductItemView = Backbone.View.extend({
 		events: {
 			'click .show': 'show'
 		},
@@ -8,7 +8,7 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 
 		template: _.template('<a href="#" class="show"><%= name %></a>'),
 
-		route: _.template('/products/category/<%= name %>'),
+		route: _.template('/products/<%= name %>'),
 
 		initialize: function() {
 			_.bindAll(this, 'render', 'show');
@@ -24,5 +24,5 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 		}
 	});
 
-	return CategoryItemView;
+	return ProductItemView;
 });
