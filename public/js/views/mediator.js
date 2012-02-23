@@ -1,11 +1,11 @@
-define(['jquery', 'underscore', 'backbone', 'collections/categories', 'views/categories/list', 'collections/products', 'views/products/list'],
+define(['jquery', 'underscore', 'backbone', 'collections/categories', 'views/categories/list', 'collections/products', 'views/products/list', 'views/products/detail'],
 
-function($, _, Backbone, CategoriesCollection, CategoryListView, ProductsCollection, ProductListView) {
+function($, _, Backbone, CategoriesCollection, CategoryListView, ProductsCollection, ProductListView, ProductDetailView) {
 	var MediatorView = Backbone.View.extend({
 		events: {},
 
 		initialize: function() {
-			_.bindAll(this, 'render', 'showCategories', 'showProducts', 'showProductsByCategory');
+			_.bindAll(this, 'render', 'showCategories', 'showProducts', 'showProduct', 'showProductsByCategory');
 
 			this.categories = new CategoriesCollection();
 			this.categories.on('reset', this.showCategories);
@@ -40,6 +40,19 @@ function($, _, Backbone, CategoriesCollection, CategoryListView, ProductsCollect
 				collection: collection
 			});
 			$(this.el).append(this.productList.render().el);
+		},
+
+		showProduct: function(name) {
+			if (this.productDetail) {
+				this.productDetail.remove();
+				this.productDetail.unbind();
+			}
+			var model = this.products.byName(name);
+			console.log(model);
+			this.productDetail = new ProductDetailView({
+				model: this.products.byName(name)
+			});
+			$(this.el).append(this.productDetail.render().el);
 		},
 
 		showProductsByCategory: function(name) {

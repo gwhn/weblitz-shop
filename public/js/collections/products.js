@@ -10,6 +10,12 @@ define(['models/Product'], function(ProductModel) {
 					return category.name === name;
 				})
 			}));
+		},
+
+		byName: function(name) {
+			return this.find(function(product) {
+				return product.get("name") === name;
+			});
 		}
 	});
 
