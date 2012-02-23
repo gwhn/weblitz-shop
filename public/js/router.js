@@ -1,9 +1,9 @@
 define(['jquery', 'underscore', 'backbone', 'views/mediator'], function($, _, Backbone, MediatorView) {
 	var Router = Backbone.Router.extend({
 		routes: {
-			'/products/category/:name': 'category',
-			'/products/:name': 'product',
-			'*actions': 'do'
+			'products/category/:name': 'category',
+			'products/:name': 'product',
+			'*actions': 'index'
 		},
 
 		initialize: function() {
@@ -12,7 +12,7 @@ define(['jquery', 'underscore', 'backbone', 'views/mediator'], function($, _, Ba
 			});
 		},
 
-		do: function(actions) {
+		index: function(actions) {
 			this.mediator.render();
 			console.log('default action');
 		},

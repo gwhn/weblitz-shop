@@ -5,30 +5,36 @@ function($, _, Backbone, CategoriesCollection, CategoryListView, ProductsCollect
 		events: {},
 
 		initialize: function() {
-			_.bindAll(this, 'render', 'showCategories', 'showProducts');
-		},
+			_.bindAll(this, 'render', 'showCategories', 'showProducts', 'showProductsByCategory');
 
-		render: function() {
 			this.categories = new CategoriesCollection();
 			this.categories.on('reset', this.showCategories);
 			this.categories.fetch();
+			this.categoryList = new CategoryListView();
+
 			this.products = new ProductsCollection();
 			this.products.on('reset', this.showProducts);
 			this.products.fetch();
+			this.productList = new ProductListView();
+		},
+
+		render: function() {
 			return this;
 		},
 
 		showCategories: function(collection) {
-			this.categoryList = new CategoryListView({
-				collection: collection
-			});
+			this.categoryList.collection = collection;
 			$(this.el).append(this.categoryList.render().el);
 		},
 
 		showProducts: function(collection) {
-			this.productList = new ProductListView({
-				collection: collection
-			});
+			this.productList.collection = collection;
+			$(this.el).append(this.productList.render().el);
+		},
+
+		showProductsByCategory: function(name) {
+			this.productList.remove();
+			this.productList.collection = this.products.byCategory(name);
 			$(this.el).append(this.productList.render().el);
 		}
 	});

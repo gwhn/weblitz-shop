@@ -1,14 +1,14 @@
 define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 	var CategoryItemView = Backbone.View.extend({
 		events: {
-			'click .show': 'show'
+			'click': 'show'
 		},
 
 		tagName: 'li',
 
-		template: _.template('<a href="#" class="show"><%= name %></a>'),
+		template: _.template('<%= name %>'),
 
-		route: _.template('/products/category/<%= name %>'),
+		route: _.template('products/category/<%= name %>'),
 
 		initialize: function() {
 			_.bindAll(this, 'render', 'show');
